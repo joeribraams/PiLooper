@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <unistd.h>
 #include <thread>
@@ -20,13 +19,12 @@ unsigned int bufferBytes;
 // rtAudio callback function
 int audioloop(void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double /*streamTime*/, RtAudioStreamStatus status, void *data)
 {
-	extern unsigned int channs;
 	double *buffer = (double *) outputBuffer; // output buffer that we pass back to rtaudio
 	double *input = (double *) inputBuffer; // input to effect
 
 	for (unsigned int i=0; i<nBufferFrames; i++)
 	{
-		*buffer++ = input[i];
+		*buffer++ = Looper.sample(input[i]);
 	}
 
 	frameCounter += nBufferFrames;
@@ -100,7 +98,7 @@ cleanup:
 
 int main()
 {
-//	Looper looper;
+	Looper looper;
 
 	realtime_audio();
 }
