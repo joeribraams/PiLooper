@@ -3,7 +3,7 @@ Audio Looper for Raspberry Pi
 
 Concept:
 
-Een looperpedaal voor gitaar, waarmee je handsfree kan opnemen en afspelen. De gebruiker moet opnemen, opname stoppen, loop stoppen en een nieuwe loop beginnen allemaal met een voetschakelaar kunnen bedienen. Hiervoor ga ik een debouncealgoritme voor de schakelaar moeten gaan ontwerpen. Opnemen en loopen lijkt me een vrij triviale stap, het zal vooral de controle zijn waar veel denkwerk in gaat moeten. Mogelijk ga ik nog andere opties, bijvoorbeeld om de loops te gaan omvormen, implementeren, maar dat zie ik als optioneel. Ik denk dat ik alles in C++ ga programmeren voor de lage latency. 
+Een looperpedaal voor gitaar, waarmee je handsfree kan opnemen en afspelen. De gebruiker moet opnemen, opname stoppen, loop stoppen en een nieuwe loop beginnen allemaal met een voetschakelaar kunnen bedienen. Hiervoor ga ik een debouncealgoritme voor de schakelaar moeten gaan ontwerpen. Opnemen en loopen lijkt me een vrij triviale stap, het zal vooral de controle zijn waar veel denkwerk in gaat moeten. Mogelijk ga ik nog andere opties, bijvoorbeeld om de loops te gaan omvormen, implementeren, maar dat zie ik als optioneel. Ik denk dat ik alles in C++ ga programmeren voor de lage latency.
 
 Componenten:
 
@@ -27,3 +27,23 @@ Handig voor indicatie van het effect, kan mogelijk ook voor wat debugging helpen
 
 -	Behuizing
 Hier kan je heel creatief mee worden, maar ik denk dat ik gewoon een oude behuizing van een vorig project hergebruik.
+
+Wiring:
+- Footswitch between 3.3v and GPIO17 with a 470k resistor between GPIO17 and ground
+- LED between GPIO18 and GND with a +- 1k current limiting resistor
+- Power off button between GPIO22 and GND
+- 9v to a 78l05 to the 5v input and GND of the pi.
+
+Steps:
+
+1.  Install fresh copy of raspbian lite.
+
+2.  Setup connection via SSH or monitor and keyboard.
+
+3.  Connect and install USB sound card like so: https://www.raspberrypi-spy.co.uk/2019/06/using-a-usb-audio-device-with-the-raspberry-pi/
+
+4.  Set up jack on the PI.
+
+5.  Install git on rpi and clone this directory on the root folder.
+
+6.  

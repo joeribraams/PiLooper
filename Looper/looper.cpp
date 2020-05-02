@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Constructor and destructor
 Looper::Looper()
 {
 	wiringPiSetup();
@@ -19,56 +20,53 @@ Looper::~Looper()
 }
 
 
-
+// Process 1 sample
 float Looper::sample(float input)
 {
-	if(digitalRead(0) == 1)
+	if(digitalRead(0) == 1) // If switch is pressed
 	{
 		recording = true;
 		holdTime++;
-		if(playing == false)
+
+		if(!playing) // If we're recording a new loop
 		{
 			buffer.push_back(input);
 		}
-		else
+		else // If we're overdubbing on an existing loop
 		{
 			buffer[step] = buffer.at(step) + input;
 		}
 	}
-	if(recording == true && digitalRead(0) == 0)
+
+	if(recording && digitalRead(0) == 0) // When switch is released
 	{
 		recording = false;
 		playing = true;
-		if(holdTime < 10000 && holdTime > 10)
+
+		if(holdTime < 5000 && holdTime > 50) // If switch was only tapped, stop loop
 		{
 			playing = false;
 			buffer.clear();
 			buffer.push_back(0);
 			step = 0;
 		}
-		cout << holdTime << endl;
+
 		holdTime = 0;
 	}
 
-	if(step < buffer.size()-1)
-	{
-		step++;
-	}
-	else
+	if(step++ >= buffer.size() - 1) // Wrap step value
 	{
 		step = 0;
 	}
 
-	if(playing == true)
+	digitalWrite(1, playing); // Light led
+
+	if(playing == true) // Output dry signal or dry and loop
 	{
-		output = buffer.at(step);
+		return input + buffer.at(step);
 	}
 	else
 	{
-		output = 0;
+		return input;
 	}
-
-	digitalWrite(1, playing);
-
-	return input + output;
 }
