@@ -1,0 +1,15 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+sudo python3 /home/shutdown.py &
+
+jackd -P70 -p16 -t2000 -dalsa -dhw:1 -p128 -n3 -r44100 -s &
+
+sudo /home/pi/PiLooper/Looper/example &
+
+exit 0

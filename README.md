@@ -1,6 +1,8 @@
 # PiLooper
 Audio Looper for Raspberry Pi
 
+Demo: https://www.youtube.com/watch?v=o57Znnf2OC8&feature=youtu.be
+
 Concept:
 
 Een looperpedaal voor gitaar, waarmee je handsfree kan opnemen en afspelen. De gebruiker moet opnemen, opname stoppen, loop stoppen en een nieuwe loop beginnen allemaal met een voetschakelaar kunnen bedienen. Hiervoor ga ik een debouncealgoritme voor de schakelaar moeten gaan ontwerpen. Opnemen en loopen lijkt me een vrij triviale stap, het zal vooral de controle zijn waar veel denkwerk in gaat moeten. Mogelijk ga ik nog andere opties, bijvoorbeeld om de loops te gaan omvormen, implementeren, maar dat zie ik als optioneel. Ik denk dat ik alles in C++ ga programmeren voor de lage latency.
@@ -42,8 +44,10 @@ Steps:
 
 3.  Connect and install USB sound card like so: https://www.raspberrypi-spy.co.uk/2019/06/using-a-usb-audio-device-with-the-raspberry-pi/
 
-4.  Set up jack on the PI.
+4.  Install and set up jack on the PI.
 
 5.  Install git on rpi and clone this directory on the root folder.
 
-6.  
+6.  install pyton3 and move shutdown.py to the home directory.
+
+7.  move rc.local to /etc/ and reboot.
